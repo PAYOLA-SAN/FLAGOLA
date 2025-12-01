@@ -4,28 +4,51 @@
   <meta charset="UTF-8" />
   <title>Flagola — World Flags Quiz</title>
 
-  <!-- Google Font for nicer typography -->
+  <!-- Playful Google font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="app">
-    <h1>Flagola — World Flags Quiz</h1>
+    <h1>Flagola</h1>
+    <p class="subtitle">World Flags Quiz</p>
 
     <!-- START SCREEN -->
     <section id="start-screen">
-      <p>Test your knowledge of world flags.</p>
+      <p class="intro">Choose your settings and press Start.</p>
 
-      <div class="settings">
-        <label for="rounds-input">Number of questions this game:</label>
-        <input id="rounds-input" type="number" min="1" />
-        <p class="settings-note">You can play up to all available flags.</p>
+      <!-- ROUNDS OPTIONS -->
+      <div class="settings-block">
+        <p class="settings-title">Number of questions this game</p>
+        <div class="rounds-buttons">
+          <button class="round-btn" data-rounds="10">10</button>
+          <button class="round-btn" data-rounds="20">20</button>
+          <button class="round-btn" data-rounds="50">50</button>
+          <button class="round-btn" data-rounds="100">100</button>
+          <button class="round-btn" data-rounds="ALL">ALL</button>
+        </div>
       </div>
 
-      <button id="start-btn">Start</button>
+      <!-- CONTINENT TOGGLES -->
+      <div class="settings-block">
+        <p class="settings-title">Include continents</p>
+        <div class="continent-buttons">
+          <button class="continent-btn active" data-continent="africa">Africa</button>
+          <button class="continent-btn active" data-continent="asia">Asia</button>
+          <button class="continent-btn active" data-continent="europe">Europe</button>
+          <button class="continent-btn active" data-continent="north_america">North America</button>
+          <button class="continent-btn active" data-continent="south_america">South America</button>
+          <button class="continent-btn active" data-continent="oceania">Oceania</button>
+        </div>
+        <p class="settings-note">Tip: click to toggle. At least one continent must stay on.</p>
+      </div>
+
+      <p id="data-status" class="data-status">Loading country data…</p>
+
+      <button id="start-btn" class="start-button" disabled>Start</button>
     </section>
 
     <!-- QUIZ SCREEN -->
@@ -53,12 +76,15 @@
 
     <!-- END SCREEN -->
     <section id="end-screen" class="hidden">
-      <h2>Quiz finished</h2>
+      <h2>Round complete</h2>
       <p>Your final score: <span id="final-score">0</span></p>
 
       <div id="review"></div>
 
-      <button id="restart-btn">Play again</button>
+      <div class="end-buttons">
+        <button id="try-again-btn">Try again</button>
+        <button id="main-menu-btn">Main menu</button>
+      </div>
     </section>
   </div>
 
