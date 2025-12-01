@@ -3,6 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <title>Flagola — World Flags Quiz</title>
+
+  <!-- Google Font for nicer typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -11,7 +17,14 @@
 
     <!-- START SCREEN -->
     <section id="start-screen">
-      <p>Test your knowledge of world flags. Click “Start” to begin.</p>
+      <p>Test your knowledge of world flags.</p>
+
+      <div class="settings">
+        <label for="rounds-input">Number of questions this game:</label>
+        <input id="rounds-input" type="number" min="1" />
+        <p class="settings-note">You can play up to all available flags.</p>
+      </div>
+
       <button id="start-btn">Start</button>
     </section>
 
@@ -42,6 +55,9 @@
     <section id="end-screen" class="hidden">
       <h2>Quiz finished</h2>
       <p>Your final score: <span id="final-score">0</span></p>
+
+      <div id="review"></div>
+
       <button id="restart-btn">Play again</button>
     </section>
   </div>
