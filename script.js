@@ -8,6 +8,10 @@ const buttons = [
   document.getElementById("answer4"),
 ];
 
+// SCORE
+let score = 0;
+const scoreDisplay = document.getElementById("score");
+
 // List of quiz questions
 const questions = [
   {
@@ -27,10 +31,29 @@ const questions = [
   }
 ];
 
+// Shuffle helper for random order of questions
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+}
+
+// order = [0,1,2] but shuffled, e.g. [2,0,1]
+let order = Array.from(questions.keys());
+shuffle(order);
+
 let currentIndex = 0;
 
+function getCurrentQuestion() {
+  const questionIndex = order[currentIndex];
+  return questions[questionIndex];
+}
+
 function setupQuestion() {
-  const q = questions[currentIndex];
+  const q = getCurrentQuestion();
 
   // Show the flag image
   flagImage.src = q.imageUrl;
@@ -39,8 +62,6 @@ function setupQuestion() {
   q.answers.forEach((answerText, index) => {
     const btn = buttons[index];
     btn.textContent = answerText;
-
-    // Remove old handler and set new one
     btn.onclick = () => handleAnswer(index);
   });
 
@@ -53,8 +74,8 @@ function handleAnswer(selectedIndex) {
 
   if (selectedIndex === q.correctIndex) {
     result.textContent = "Correct!";
-    score++; // add 1 point
-    scoreDisplay.textContent = score; // update number on the page
+    score++;                          // add 1 point
+    scoreDisplay.textContent = score; // update score on page
   } else {
     result.textContent = "Wrong. Correct answer: " + q.answers[q.correctIndex];
   }
@@ -63,6 +84,7 @@ function handleAnswer(selectedIndex) {
   setTimeout(() => {
     currentIndex++;
 
+    // If we reached the end, reshuffle and start again
     if (currentIndex >= order.length) {
       shuffle(order);
       currentIndex = 0;
