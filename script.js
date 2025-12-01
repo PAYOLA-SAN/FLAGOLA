@@ -5,7 +5,8 @@ const endScreen = document.getElementById("end-screen");
 
 const startBtn = document.getElementById("start-btn");
 const nextBtn = document.getElementById("next-btn");
-const restartBtn = document.getElementById("restart-btn");
+const tryAgainBtn = document.getElementById("try-again-btn");
+const mainMenuBtn = document.getElementById("main-menu-btn");
 
 const flagImage = document.getElementById("flag-image");
 const result = document.getElementById("result");
@@ -21,48 +22,36 @@ const questionNumberDisplay = document.getElementById("question-number");
 const questionTotalDisplay = document.getElementById("question-total");
 const finalScoreDisplay = document.getElementById("final-score");
 const reviewContainer = document.getElementById("review");
-const roundsInput = document.getElementById("rounds-input");
+const dataStatus = document.getElementById("data-status");
 
-// DATA
-// Assumes Bhutan.svg is in the same folder as index.html
-const questions = [
-  {
-    imageUrl: "Bhutan.svg",
-    answers: ["Bhutan", "Nepal", "Sri Lanka", "India"],
-    correctIndex: 0
-  },
-  {
-    imageUrl: "https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg",
-    answers: ["France", "Germany", "Italy", "Spain"],
-    correctIndex: 0
-  },
-  {
-    imageUrl: "https://upload.wikimedia.org/wikipedia/en/b/ba/Flag_of_Germany.svg",
-    answers: ["France", "Germany", "Italy", "Spain"],
-    correctIndex: 1
-  },
-  {
-    imageUrl: "https://upload.wikimedia.org/wikipedia/en/4/41/Flag_of_India.svg",
-    answers: ["Ireland", "Italy", "India", "Niger"],
-    correctIndex: 2
-  }
-];
+const roundButtons = Array.from(document.querySelectorAll(".round-btn"));
+const continentButtons = Array.from(document.querySelectorAll(".continent-btn"));
 
-// Set initial max and default for rounds input (based on data length)
-roundsInput.max = questions.length.toString();
-roundsInput.value = questions.length.toString();
-questionTotalDisplay.textContent = questions.length.toString();
+// DATA FROM API
+let allCountries = []; // { name, imageUrl, region, subregion }
+let dataReady = false;
 
-// STATE
+// SETTINGS STATE
+let selectedRounds = "ALL";
+let continentFilters = {
+  africa: true,
+  asia: true,
+  europe: true,
+  north_america: true,
+  south_america: true,
+  oceania: true
+};
+
+// GAME STATE
 let score = 0;
-let order = [];
-let currentIndex = 0;   // index into "order"
-let totalRounds = questions.length;
-let currentRound = 0;   // how many questions have been played so far
+let questionPool = [];   // built from filtered countries
+let questionOrder = [];  // shuffled indices into questionPool
+let currentIndex = 0;    // index in questionOrder
+let totalRounds = 0;
 let currentAnswers = []; // shuffled answers for current question
-let wrongQuestions = []; // list of wrong answers for review
+let wrongQuestions = []; // for review
 
-// UTILS
+// UTILITIES
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -72,21 +61,114 @@ function shuffle(array) {
   }
 }
 
-function buildShuffledAnswers(question) {
-  const arr = question.answers.map((text, idx) => ({
-    text,
-    isCorrect: idx === question.correctIndex
-  }));
-  shuffle(arr);
-  return arr;
+function continentTag(country) {
+  // country.region: Africa, Americas, Asia, Europe, Oceania, Antarctic
+  // country.subregion: e.g. "South America", "North America", "Caribbean"
+  switch (country.region) {
+    case "Africa":
+      return "africa";
+    case "Asia":
+      return "asia";
+    case "Europe":
+      return "europe";
+    case "Oceania":
+      return "oceania";
+    case "Americas":
+      if (country.subregion === "South America") return "south_america";
+      // treat all other Americas as North America for this quiz
+      return "north_america";
+    default:
+      return null;
+  }
+}
+
+// FETCH COUNTRY DATA
+async function loadCountryData() {
+  try {
+    dataStatus.textContent = "Loading country data…";
+
+    const response = await fetch(
+      "https://restcountries.com/v3.1/all?fields=name,region,subregion,flags"
+    );
+    const data = await response.json();
+
+    allCountries = data
+      .filter(c => c.flags && (c.flags.png || c.flags.svg))
+      .map(c => ({
+        name: c.name.common,
+        region: c.region || "",
+        subregion: c.subregion || "",
+        imageUrl: c.flags.png || c.flags.svg
+      }));
+
+    dataReady = true;
+    dataStatus.textContent = `Loaded ${allCountries.length} countries.`;
+    startBtn.disabled = false;
+  } catch (err) {
+    console.error(err);
+    dataStatus.textContent = "Error loading data. Refresh the page to try again.";
+    startBtn.disabled = true;
+  }
+}
+
+// QUESTION BUILDING
+
+function buildQuestionPool(filteredCountries) {
+  const pool = [];
+
+  filteredCountries.forEach(country => {
+    // build 3 wrong options
+    const wrongNames = [];
+    while (wrongNames.length < 3 && wrongNames.length < filteredCountries.length - 1) {
+      const other = filteredCountries[Math.floor(Math.random() * filteredCountries.length)];
+      if (other.name === country.name) continue;
+      if (!wrongNames.includes(other.name)) wrongNames.push(other.name);
+    }
+
+    const answers = [...wrongNames, country.name];
+    shuffle(answers);
+    const correctIndex = answers.indexOf(country.name);
+
+    pool.push({
+      name: country.name,
+      imageUrl: country.imageUrl,
+      answers,
+      correctIndex,
+      regionTag: continentTag(country)
+    });
+  });
+
+  return pool;
+}
+
+function buildFilteredCountries() {
+  const activeContinents = Object.entries(continentFilters)
+    .filter(([, isOn]) => isOn)
+    .map(([key]) => key);
+
+  let candidates;
+
+  if (activeContinents.length === 0) {
+    // fall back to all
+    candidates = allCountries.slice();
+  } else {
+    candidates = allCountries.filter(c => {
+      const tag = continentTag(c);
+      if (!tag) return false;
+      return continentFilters[tag];
+    });
+  }
+
+  return candidates;
 }
 
 function getCurrentQuestion() {
-  const qIndex = order[currentIndex];
-  return questions[qIndex];
+  const poolIndex = questionOrder[currentIndex];
+  return questionPool[poolIndex];
 }
 
 // UI FLOW
+
 function showStartScreen() {
   startScreen.classList.remove("hidden");
   quizScreen.classList.add("hidden");
@@ -106,10 +188,9 @@ function showEndScreen() {
 
   finalScoreDisplay.textContent = `${score} / ${totalRounds}`;
 
-  // Build review of wrong answers
   reviewContainer.innerHTML = "";
   if (wrongQuestions.length === 0) {
-    reviewContainer.textContent = "You answered all questions correctly.";
+    reviewContainer.textContent = "Perfect — you answered every question correctly.";
   } else {
     const intro = document.createElement("p");
     intro.textContent = "You missed these:";
@@ -137,57 +218,74 @@ function showEndScreen() {
   }
 }
 
-// MAIN QUIZ LOGIC
+// GAME LOGIC
+
 function startQuiz() {
-  // Score and state
+  if (!dataReady) {
+    alert("Still loading country data. Please wait a moment and try again.");
+    return;
+  }
+
+  // build filtered set
+  const filteredCountries = buildFilteredCountries();
+  if (filteredCountries.length < 4) {
+    alert("Not enough countries with the current filters. Turn on more continents.");
+    return;
+  }
+
+  // rounds
+  let maxRounds = filteredCountries.length;
+  let requested;
+
+  if (selectedRounds === "ALL") {
+    requested = maxRounds;
+  } else {
+    requested = parseInt(selectedRounds, 10);
+    if (!Number.isFinite(requested) || requested < 1) requested = maxRounds;
+    requested = Math.min(requested, maxRounds);
+  }
+
+  totalRounds = requested;
+  questionTotalDisplay.textContent = totalRounds.toString();
+
+  // build question pool and order
+  questionPool = buildQuestionPool(filteredCountries);
+  questionOrder = Array.from(questionPool.keys());
+  shuffle(questionOrder);
+
+  // trim to desired rounds
+  if (questionOrder.length > totalRounds) {
+    questionOrder = questionOrder.slice(0, totalRounds);
+  }
+
+  // reset state
   score = 0;
   scoreDisplay.textContent = "0";
   wrongQuestions = [];
-
-  // Determine number of rounds from settings
-  const requested = parseInt(roundsInput.value, 10);
-  if (!Number.isFinite(requested) || requested < 1) {
-    totalRounds = questions.length;
-  } else {
-    totalRounds = Math.min(requested, questions.length);
-  }
-  questionTotalDisplay.textContent = totalRounds.toString();
-
-  // Order of questions
-  order = Array.from(questions.keys());
-  shuffle(order);
   currentIndex = 0;
-  currentRound = 0;
 
   showQuizScreen();
   loadCurrentQuestion();
 }
 
 function loadCurrentQuestion() {
-  // If we've already played enough rounds, end
-  if (currentRound >= totalRounds || currentIndex >= order.length) {
-    showEndScreen();
-    return;
-  }
-
   const q = getCurrentQuestion();
-  currentAnswers = buildShuffledAnswers(q);
 
-  // Question number is 1-based
-  questionNumberDisplay.textContent = (currentRound + 1).toString();
-
-  // Show flag
+  questionNumberDisplay.textContent = (currentIndex + 1).toString();
   flagImage.src = q.imageUrl;
   result.textContent = "";
   nextBtn.disabled = true;
 
-  // Reset and wire buttons
+  currentAnswers = q.answers.map(text => ({
+    text,
+    isCorrect: text === q.answers[q.correctIndex]
+  }));
+
   buttons.forEach((btn, i) => {
-    const answerData = currentAnswers[i];
-    btn.textContent = answerData.text;
+    const data = currentAnswers[i];
+    btn.textContent = data.text;
     btn.disabled = false;
     btn.classList.remove("correct", "wrong");
-
     btn.onclick = () => handleAnswer(i);
   });
 }
@@ -197,12 +295,8 @@ function handleAnswer(buttonIndex) {
   const answerData = currentAnswers[buttonIndex];
   const isCorrect = answerData.isCorrect;
 
-  // Disable all buttons
-  buttons.forEach(btn => {
-    btn.disabled = true;
-  });
+  buttons.forEach(btn => (btn.disabled = true));
 
-  // Mark selected button
   const selectedBtn = buttons[buttonIndex];
   if (isCorrect) {
     selectedBtn.classList.add("correct");
@@ -213,15 +307,13 @@ function handleAnswer(buttonIndex) {
     selectedBtn.classList.add("wrong");
     result.textContent = "Wrong.";
 
-    // Record wrong answer for review
     wrongQuestions.push({
       correct: q.answers[q.correctIndex],
-      chosen: answerData.text,
-      imageUrl: q.imageUrl
+      chosen: answerData.text
     });
   }
 
-  // Highlight the correct one
+  // highlight the correct one
   currentAnswers.forEach((ans, i) => {
     if (ans.isCorrect) {
       buttons[i].classList.add("correct");
@@ -232,20 +324,61 @@ function handleAnswer(buttonIndex) {
 }
 
 function goToNextQuestion() {
-  currentRound++;
   currentIndex++;
-
-  if (currentRound >= totalRounds || currentIndex >= order.length) {
+  if (currentIndex >= questionOrder.length) {
     showEndScreen();
   } else {
     loadCurrentQuestion();
   }
 }
 
+// SETTINGS HANDLERS
+
+function selectRounds(value) {
+  selectedRounds = value;
+  roundButtons.forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.rounds === value);
+  });
+}
+
+function toggleContinent(key) {
+  const current = continentFilters[key];
+  const activeCount = Object.values(continentFilters).filter(Boolean).length;
+
+  // prevent turning off the last active continent
+  if (current && activeCount === 1) {
+    return;
+  }
+
+  continentFilters[key] = !current;
+
+  continentButtons.forEach(btn => {
+    const c = btn.dataset.continent;
+    btn.classList.toggle("active", continentFilters[c]);
+  });
+}
+
 // EVENT WIRING
+
+roundButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    selectRounds(btn.dataset.rounds);
+  });
+});
+// default initial selection: ALL
+selectRounds("ALL");
+
+continentButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    toggleContinent(btn.dataset.continent);
+  });
+});
+
 startBtn.addEventListener("click", startQuiz);
-restartBtn.addEventListener("click", startQuiz);
+tryAgainBtn.addEventListener("click", startQuiz);
+mainMenuBtn.addEventListener("click", showStartScreen);
 nextBtn.addEventListener("click", goToNextQuestion);
 
 // INITIAL
 showStartScreen();
+loadCountryData();
