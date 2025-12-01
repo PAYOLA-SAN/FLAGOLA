@@ -1,4 +1,4 @@
-// Get references to things in your HTML
+// Get references to elements in index.html
 const flagImage = document.getElementById("flag-image");
 const result = document.getElementById("result");
 const buttons = [
@@ -8,7 +8,7 @@ const buttons = [
   document.getElementById("answer4"),
 ];
 
-// One simple question: the French flag
+// List of quiz questions
 const questions = [
   {
     imageUrl: "bhutan.svg",
@@ -27,35 +27,45 @@ const questions = [
   }
 ];
 
-};
+let currentIndex = 0;
 
 function setupQuestion() {
-  // Show the flag
-  flagImage.src = question.imageUrl;
+  const q = questions[currentIndex];
 
-  // Put answer text on the buttons
-  question.answers.forEach((answerText, index) => {
+  // Show the flag image
+  flagImage.src = q.imageUrl;
+
+  // Set button text and click handlers
+  q.answers.forEach((answerText, index) => {
     const btn = buttons[index];
     btn.textContent = answerText;
 
-    // Remove any old click handler first
-    btn.onclick = null;
-
-    // Add new click handler
+    // Remove old handler and set new one
     btn.onclick = () => handleAnswer(index);
   });
 
-  // Clear previous result text
+  // Clear previous result
   result.textContent = "";
 }
 
 function handleAnswer(selectedIndex) {
-  if (selectedIndex === question.correctIndex) {
+  const q = questions[currentIndex];
+
+  if (selectedIndex === q.correctIndex) {
     result.textContent = "Correct!";
   } else {
-    result.textContent = "Wrong. The correct answer is " + question.answers[question.correctIndex] + ".";
+    result.textContent = "Wrong. Correct answer: " + q.answers[q.correctIndex];
   }
+
+  // Move to the next question after 1.2 seconds
+  setTimeout(() => {
+    currentIndex++;
+    if (currentIndex >= questions.length) {
+      currentIndex = 0; // restart from first question
+    }
+    setupQuestion();
+  }, 1200);
 }
 
-// Run once when the page loads
+// Start the quiz
 setupQuestion();
