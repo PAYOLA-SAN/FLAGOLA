@@ -10,7 +10,7 @@ const buttons = [
 
 // One simple question: the French flag
 const question = {
-  imageUrl: "https://upload.wikimedia.org/wikipedia/commons/9/91/Flag_of_Bhutan.svg",
+  imageUrl: "hhttps://upload.wikimedia.org/wikipedia/en/9/91/Flag_of_Bhutan.svg",
   answers: ["France", "Germany", "Italy", "Spain"],
   correctIndex: 0, // 0 = first item ("France")
 };
