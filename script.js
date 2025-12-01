@@ -11,7 +11,7 @@ const buttons = [
 // List of quiz questions
 const questions = [
   {
-    imageUrl: "bhutan.svg",
+    imageUrl: "Bhutan.svg",
     answers: ["Bhutan", "Nepal", "Sri Lanka", "India"],
     correctIndex: 0
   },
