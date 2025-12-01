@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flagola</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="hero">
+      <div class="hero__text">
+        <p class="eyebrow">Flag guessing game</p>
+        <h1>Test your flag knowledge</h1>
+        <p class="lede">Look at the flag and choose the correct country. Earn streaks, learn facts, and challenge your friends.</p>
+      </div>
+      <div class="score-card" aria-live="polite">
+        <p class="score-card__label">Score</p>
+        <p class="score-card__value" id="scoreValue">0</p>
+        <p class="score-card__sub">Streak: <span id="streakValue">0</span></p>
+      </div>
+    </header>
+
+    <section class="card" aria-live="polite">
+      <div class="flag" id="flagDisplay" aria-label="Flag image" role="img"></div>
+      <p class="hint" id="hint"></p>
+      <div class="choices" id="choices" role="list"></div>
+      <div class="actions">
+        <button id="nextBtn" class="btn" disabled>Next question</button>
+        <button id="restartBtn" class="btn btn--ghost">Restart</button>
+      </div>
+      <p class="feedback" id="feedback" aria-live="polite"></p>
+      <p class="progress" id="progress"></p>
+    </section>
+  </main>
+
+  <template id="choiceTemplate">
+    <button class="choice" role="listitem"></button>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
