@@ -1,10 +1,3 @@
- (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
-diff --git a/README.md b/README.md
-new file mode 100644
-index 0000000000000000000000000000000000000000..cf97b2224985674bdbb2923e389fceb05f67e8e7
---- /dev/null
-+++ b/README.md
-@@ -0,0 +1,19 @@
 +# Flagola Flag Guessing Game
 +
 +A lightweight static front-end for a flag guessing experience. The app was originally structured as a simple HTML page styled with CSS and wired up to a `script.js` entry point for flag selection and scoring logic. It is intended to be easy to serve from any static host or by simply opening `index.html` directly in the browser.
