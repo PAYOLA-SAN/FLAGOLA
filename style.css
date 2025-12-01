@@ -1,27 +1,30 @@
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-  background: #f5f7fb;
+  font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #1f3b70, #233b86, #1a73e8);
+  color: #1a1c1f;
 }
 
 .app {
-  max-width: 600px;
+  max-width: 640px;
   margin: 40px auto;
   background: #ffffff;
-  padding: 24px 20px 28px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  padding: 24px 24px 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
 h1 {
   margin-top: 0;
   margin-bottom: 12px;
   text-align: center;
+  font-weight: 600;
 }
 
 h2 {
   margin-top: 0;
   text-align: center;
+  font-weight: 600;
 }
 
 .top-bar {
@@ -35,11 +38,11 @@ h2 {
 .flag {
   display: block;
   margin: 16px auto;
-  max-width: 240px;
+  max-width: 260px;
   height: auto;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  background: #fafafa;
+  border: 1px solid #d0d4dc;
+  border-radius: 8px;
+  background: #f7f9fc;
 }
 
 .answers {
@@ -51,16 +54,19 @@ h2 {
 
 .answer-btn {
   padding: 10px 14px;
-  border-radius: 6px;
+  border-radius: 8px;
   border: 1px solid #d0d4dc;
   background: #f7f9fc;
   cursor: pointer;
   text-align: left;
   font-size: 0.95rem;
+  transition: background 0.15s, transform 0.05s, box-shadow 0.15s;
 }
 
 .answer-btn:hover:enabled {
   background: #e8eefc;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
 }
 
 .answer-btn.correct {
@@ -81,23 +87,28 @@ button {
 #next-btn,
 #restart-btn {
   padding: 10px 18px;
-  border-radius: 6px;
+  border-radius: 8px;
   border: none;
   background: #1a73e8;
   color: #ffffff;
   font-size: 0.95rem;
   cursor: pointer;
+  transition: background 0.15s, transform 0.05s, box-shadow 0.15s;
 }
 
 #next-btn:disabled {
   background: #a9b4c8;
   cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
 }
 
 #start-btn:hover,
 #restart-btn:hover,
 #next-btn:hover:enabled {
   background: #1557b0;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.18);
 }
 
 .result {
@@ -112,4 +123,69 @@ button {
 
 section {
   margin-top: 8px;
+}
+
+/* Settings block on start page */
+.settings {
+  margin: 12px 0 18px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #f5f7fb;
+  border: 1px solid #d0d4dc;
+}
+
+.settings label {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+
+.settings input[type="number"] {
+  width: 80px;
+  padding: 4px 6px;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  border: 1px solid #c0c4d0;
+}
+
+.settings-note {
+  margin: 6px 0 0;
+  font-size: 0.8rem;
+  color: #555;
+}
+
+/* Review list at end */
+#review {
+  margin: 16px 0 18px;
+  font-size: 0.9rem;
+}
+
+.review-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 8px 0 0;
+}
+
+.review-list li {
+  margin-bottom: 8px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: #f5f7fb;
+  border: 1px solid #d0d4dc;
+}
+
+.review-flag-name {
+  font-weight: 600;
+}
+
+/* Slightly tighter layout on very small screens */
+@media (max-width: 480px) {
+  .app {
+    margin: 20px 10px;
+    padding: 18px 14px 22px;
+  }
+
+  .flag {
+    max-width: 200px;
+  }
 }
