@@ -9,10 +9,24 @@ const buttons = [
 ];
 
 // One simple question: the French flag
-const question = {
-  imageUrl: "https://upload.wikimedia.org/wikipedia/en/9/91/Flag_of_Bhutan.svg",
-  answers: ["France", "Germany", "Italy", "Spain"],
-  correctIndex: 0, // 0 = first item ("France")
+const questions = [
+  {
+    imageUrl: "bhutan.svg",
+    answers: ["Bhutan", "Nepal", "Sri Lanka", "India"],
+    correctIndex: 0
+  },
+  {
+    imageUrl: "https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg",
+    answers: ["France", "Germany", "Italy", "Spain"],
+    correctIndex: 0
+  },
+  {
+    imageUrl: "https://upload.wikimedia.org/wikipedia/en/b/ba/Flag_of_Germany.svg",
+    answers: ["France", "Germany", "Italy", "Spain"],
+    correctIndex: 1
+  }
+];
+
 };
 
 function setupQuestion() {
