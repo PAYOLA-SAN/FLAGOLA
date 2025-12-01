@@ -5,6 +5,10 @@ body {
   color: #1b1d22;
 }
 
+.hidden {
+  display: none !important;
+}
+
 .app {
   max-width: 720px;
   margin: 40px auto;
@@ -84,7 +88,6 @@ h1 {
   min-height: 1em;
 }
 
-/* Start button */
 .start-button {
   width: 100%;
   padding: 12px 26px;
@@ -97,7 +100,7 @@ h1 {
   cursor: pointer;
 }
 
-/* Flag container (fixed height) */
+/* FIXED HEIGHT FLAG AREA */
 .flag-box {
   height: 250px;
   display: flex;
@@ -114,7 +117,7 @@ h1 {
   width: auto;
 }
 
-/* Answers */
+/* ANSWERS */
 .answers {
   display: grid;
   gap: 8px;
@@ -132,6 +135,7 @@ h1 {
   background: #c8e6c9;
   border-color: #2e7d32;
 }
+
 .answer-btn.wrong {
   background: #ffcdd2;
   border-color: #c62828;
@@ -164,7 +168,15 @@ h1 {
   cursor: not-allowed;
 }
 
-/* End screen */
+/* FIX FOR LAYOUT JUMP */
+.result {
+  min-height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* END SCREEN */
 .end-buttons {
   margin-top: 20px;
   display: flex;
@@ -172,9 +184,9 @@ h1 {
   justify-content: center;
 }
 
-/* Modal */
+/* MODAL */
 .modal.hidden {
-  display: none;
+  display: none !important;
 }
 
 .modal {
