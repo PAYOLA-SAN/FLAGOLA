@@ -49,20 +49,25 @@ function setupQuestion() {
 }
 
 function handleAnswer(selectedIndex) {
-  const q = questions[currentIndex];
+  const q = getCurrentQuestion();
 
   if (selectedIndex === q.correctIndex) {
     result.textContent = "Correct!";
+    score++; // add 1 point
+    scoreDisplay.textContent = score; // update number on the page
   } else {
     result.textContent = "Wrong. Correct answer: " + q.answers[q.correctIndex];
   }
 
-  // Move to the next question after 1.2 seconds
+  // move to next question after short delay
   setTimeout(() => {
     currentIndex++;
-    if (currentIndex >= questions.length) {
-      currentIndex = 0; // restart from first question
+
+    if (currentIndex >= order.length) {
+      shuffle(order);
+      currentIndex = 0;
     }
+
     setupQuestion();
   }, 1200);
 }
