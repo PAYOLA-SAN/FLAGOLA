@@ -533,10 +533,10 @@ function showStartScreen() {
 const titleScreen = document.getElementById("title-screen");
 
 function showMainMenu() {
-  titleScreen.classList.add("fade-out");
-  setTimeout(() => {
-    titleScreen.style.display = "none";
-  }, 400);
+  // Immediately hide the title screen
+  titleScreen.style.display = "none";
+  // Make sure the main menu is shown
+  showStartScreen();
 }
 
 titleScreen.addEventListener("click", showMainMenu);
