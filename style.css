@@ -343,4 +343,44 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* -------------------------------------- */
+/* GLOBAL PIXEL FONT SIZE + BOLD UPGRADE  */
+/* -------------------------------------- */
+
+/* Main titles (menu, quiz, end screen) */
+h1, .menu-title {
+  font-size: 48px !important;
+  text-shadow: 3px 3px #000 !important;
+}
+
+/* Section subtitles */
+h2, .subtitle, .menu-sub, .menu-instr, .settings-title {
+  font-size: 24px !important;
+  text-shadow: 2px 2px #000 !important;
+}
+
+/* Paragraphs and standard text */
+p, .data-status, .error-message, .result, .top-bar {
+  font-size: 20px !important;
+}
+
+/* Buttons */
+button, .start-button, .round-btn, .continent-btn, .answer-btn,
+.quit-btn, .next-btn, #quit-modal button {
+  font-size: 22px !important;
+  padding: 18px 26px !important;
+  border-width: 4px !important;
+  text-shadow: 2px 2px #000 !important;
+}
+
+/* End-screen score text */
+.end-score {
+  font-size: 26px !important;
+}
+
+/* Quit popup text */
+#quit-modal p {
+  font-size: 22px !important;
+  text-shadow: 2px 2px #000 !important;
+}
 
