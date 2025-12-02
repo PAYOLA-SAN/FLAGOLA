@@ -522,7 +522,6 @@ function showQuizScreen() {
 }
 
 function showStartScreen() {
-    titleScreen.style.display = "none";
     pixelSwitch("start-screen");
 }
 
@@ -576,5 +575,4 @@ mainMenuBtn.onclick=showStartScreen;
 
 loadCountryData();
 updateFilteredAndRoundButtons();
-showStartScreen();
 
