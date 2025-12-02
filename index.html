@@ -16,13 +16,6 @@
 </head>
 
 <body>
-  <svg id="fx" width="0" height="0">
-<filter id="pixelate">
-<feComponentTransfer>
-<feFuncA type="discrete" tableValues="0 1"/>
-</feComponentTransfer>
-</filter>
-</svg>
   <div class="app">
     <h1>Flagola</h1>
     <p class="subtitle">World Flags Quiz</p>
@@ -37,8 +30,7 @@
     <!-- START SCREEN -->
     <section id="start-screen">
       <p class="intro">Choose your settings and press Start.</p>
-        <img src="Title text.png" alt="FLAGOLA" class="logo-menu">
-      
+
       <!-- ROUND OPTIONS -->
       <div class="settings-block">
         <p class="settings-title">Number of questions this game</p>
@@ -72,7 +64,6 @@
 
     <!-- QUIZ SCREEN -->
     <section id="quiz-screen" class="hidden">
-        <img src="Title text.png" alt="FLAGOLA" class="logo-menu">
       <div class="top-bar">
         <p>Score: <span id="score">0</span></p>
         <p>Question <span id="question-number">1</span> / <span id="question-total">0</span></p>
@@ -99,7 +90,6 @@
 
     <!-- END SCREEN -->
     <section id="end-screen" class="hidden">
-      <section id="end-screen" class="hidden">
       <h2>Round complete</h2>
       <p>Your final score: <span id="final-score">0</span></p>
 
