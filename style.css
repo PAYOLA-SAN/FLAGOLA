@@ -225,7 +225,7 @@ h1 {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url("Title background.png") center/cover no-repeat;
+  background: #0000ff url("Title background.png") top center / contain no-repeat;
 
   /* MAKE IT PIXELATED */
   image-rendering: pixelated;
