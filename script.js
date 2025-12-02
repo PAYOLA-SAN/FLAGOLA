@@ -9,7 +9,6 @@
 const startScreen = document.getElementById("start-screen");
 const quizScreen = document.getElementById("quiz-screen");
 const endScreen = document.getElementById("end-screen");
-const titleScreen = document.getElementById("title-screen");
 
 const startBtn = document.getElementById("start-btn");
 const nextBtn = document.getElementById("next-btn");
@@ -41,21 +40,6 @@ const answerButtons = [
   document.getElementById("answer3"),
   document.getElementById("answer4")
 ];
-
-function pixelSwitch(targetScreen) {
-    // remove previous active classes
-    document.querySelectorAll(".screen").forEach(scr => scr.classList.remove("active"));
-
-    // short delay to allow CSS steps animation to trigger
-    setTimeout(() => {
-        document.querySelectorAll(".screen").forEach(scr => scr.style.display = "none");
-
-        const el = document.getElementById(targetScreen);
-        el.style.display = "block";
-        el.classList.add("active");
-    }, 10);
-}
-
 
 /******************************************************
  * FULL OFFLINE COUNTRY DATA (197 entries)
@@ -496,49 +480,61 @@ quitYes.onclick=()=>{
  * END SCREEN
  ******************************************************/
 
-function showEndScreen() {
-    pixelSwitch("end-screen");
+function showEndScreen(){
+  startScreen.classList.add("hidden");
+  quizScreen.classList.add("hidden");
+  endScreen.classList.remove("hidden");
 
-    const ul = document.createElement("ul");
-    ul.innerHTML = "";
+  finalScoreDisplay.textContent=`${score} / ${totalRounds}`;
 
-    wrongQuestions.forEach(w => {
-        const li = document.createElement("li");
-        li.textContent = `${w.correct} — you answered: ${w.chosen}`;
-        ul.appendChild(li);
-    });
+  reviewContainer.innerHTML="";
+  if(wrongQuestions.length===0){
+    reviewContainer.textContent="Perfect — all correct.";
+    return;
+  }
 
-    reviewContainer.innerHTML = "";
-    reviewContainer.appendChild(ul);
+  const ul=document.createElement("ul");
+  wrongQuestions.forEach(w=>{
+    const li=document.createElement("li");
+    li.textContent=`${w.correct} — you answered: ${w.chosen}`;
+    ul.appendChild(li);
+  });
+  reviewContainer.appendChild(ul);
 }
 
 /******************************************************
  * SCREEN SWITCH
  ******************************************************/
 
-function showQuizScreen() {
-    titleScreen.style.display = "none";
-    pixelSwitch("quiz-screen");
+function showQuizScreen(){
+  startScreen.classList.add("hidden");
+  quizScreen.classList.remove("hidden");
+  endScreen.classList.add("hidden");
 }
 
-function showStartScreen() {
-    pixelSwitch("start-screen");
+function showStartScreen(){
+  startScreen.classList.remove("hidden");
+  quizScreen.classList.add("hidden");
+  endScreen.classList.add("hidden");
+  errorMessage.textContent="";
 }
-
 
 /******************************************************
  * TITLE SCREEN HANDLER
  ******************************************************/
 
+const titleScreen = document.getElementById("title-screen");
+
 function showMainMenu() {
+  titleScreen.classList.add("fade-out");
+  setTimeout(() => {
     titleScreen.style.display = "none";
-    pixelSwitch("start-screen");
+  }, 400);
 }
 
 titleScreen.addEventListener("click", showMainMenu);
-
 document.addEventListener("keydown", () => {
-    showMainMenu();
+  if (!titleScreen.classList.contains("fade-out")) showMainMenu();
 });
 
 /******************************************************
@@ -575,4 +571,4 @@ mainMenuBtn.onclick=showStartScreen;
 
 loadCountryData();
 updateFilteredAndRoundButtons();
-
+showStartScreen();
