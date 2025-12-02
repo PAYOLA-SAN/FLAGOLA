@@ -9,6 +9,7 @@
 const startScreen = document.getElementById("start-screen");
 const quizScreen = document.getElementById("quiz-screen");
 const endScreen = document.getElementById("end-screen");
+const titleScreen = document.getElementById("title-screen");
 
 const startBtn = document.getElementById("start-btn");
 const nextBtn = document.getElementById("next-btn");
@@ -529,9 +530,6 @@ function showStartScreen() {
 /******************************************************
  * TITLE SCREEN HANDLER
  ******************************************************/
-
-const titleScreen = document.getElementById("title-screen");
-
 function showMainMenu() {
   // Immediately hide the title screen
   titleScreen.style.display = "none";
