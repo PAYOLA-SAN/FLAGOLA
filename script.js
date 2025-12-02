@@ -578,3 +578,5 @@ mainMenuBtn.onclick=showStartScreen;
 
 loadCountryData();
 updateFilteredAndRoundButtons();
+showStartScreen();
+
