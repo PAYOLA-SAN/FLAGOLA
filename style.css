@@ -249,16 +249,7 @@ h1 {
   85%  { top: 110px; }
   100% { top: 130px; }
 }
-.title-subtitle {
-  font-family: "Press Start 2P", monospace;
-  font-size: 20px;
-  color: white;
-  text-shadow: 3px 3px #000;
-  position: absolute;
-  top: 250px;
-  left: 50%;
-  transform: translateX(-50%);
-}
+
 .title-press {
   font-family: "Press Start 2P", monospace;
   font-size: 22px;
@@ -270,4 +261,13 @@ h1 {
   transform: translateX(-50%);
   animation: blink 0.7s steps(2) infinite;
 }
-
+.title-subtitle {
+  font-family: "Press Start 2P", monospace;
+  font-size: 20px;
+  color: white;
+  text-shadow: 3px 3px #000;
+  position: absolute;
+  top: 250px;
+  left: 50%;
+  transform: translateX(-50%);
+}
