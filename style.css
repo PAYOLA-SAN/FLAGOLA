@@ -384,3 +384,21 @@ button, .start-button, .round-btn, .continent-btn, .answer-btn,
   text-shadow: 2px 2px #000 !important;
 }
 
+/* Pixelated dissolve transition */
+.screen {
+  opacity: 0;
+  filter: url(#pixelate);
+  transition: opacity 0.45s steps(4, end);
+}
+
+.screen.active {
+  opacity: 1;
+}
+
+/* SVG pixelation filter */
+svg#fx {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+/* SVG filter block (embedded visually) */
