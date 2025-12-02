@@ -497,18 +497,19 @@ quitYes.onclick=()=>{
  ******************************************************/
 
 function showEndScreen() {
-    titleScreen.style.display = "none";
     pixelSwitch("end-screen");
-}
 
+    const ul = document.createElement("ul");
+    ul.innerHTML = "";
 
-  const ul=document.createElement("ul");
-  wrongQuestions.forEach(w=>{
-    const li=document.createElement("li");
-    li.textContent=`${w.correct} — you answered: ${w.chosen}`;
-    ul.appendChild(li);
-  });
-  reviewContainer.appendChild(ul);
+    wrongQuestions.forEach(w => {
+        const li = document.createElement("li");
+        li.textContent = `${w.correct} — you answered: ${w.chosen}`;
+        ul.appendChild(li);
+    });
+
+    reviewContainer.innerHTML = "";
+    reviewContainer.appendChild(ul);
 }
 
 /******************************************************
