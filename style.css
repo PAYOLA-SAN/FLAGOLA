@@ -232,3 +232,42 @@ h1 {
   font-family: "Press Start 2P", monospace;
   z-index: 99999;
 }
+/* MOVING LOGO PNG */
+.title-logo-img {
+  width: 650px;
+  image-rendering: pixelated;
+  position: absolute;
+  top: -400px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: logoDrop 1.2s ease-out forwards;
+}
+
+@keyframes logoDrop {
+  0%   { top: -400px; }
+  70%  { top: 150px; }
+  85%  { top: 110px; }
+  100% { top: 130px; }
+}
+.title-subtitle {
+  font-family: "Press Start 2P", monospace;
+  font-size: 20px;
+  color: white;
+  text-shadow: 3px 3px #000;
+  position: absolute;
+  top: 250px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.title-press {
+  font-family: "Press Start 2P", monospace;
+  font-size: 22px;
+  color: white;
+  text-shadow: 3px 3px #000;
+  position: absolute;
+  top: 330px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: blink 0.7s steps(2) infinite;
+}
+
