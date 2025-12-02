@@ -413,4 +413,9 @@ svg#fx {
 .screen.active {
     opacity: 1;
 }
+.title-screen.fade-out {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease-out;
+}
 
