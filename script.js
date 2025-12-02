@@ -529,16 +529,16 @@ function showStartScreen() {
 /******************************************************
  * TITLE SCREEN HANDLER
  ******************************************************/
+
 function showMainMenu() {
-  // Immediately hide the title screen
-  titleScreen.style.display = "none";
-  // Make sure the main menu is shown
-  showStartScreen();
+    titleScreen.style.display = "none";
+    pixelSwitch("start-screen");
 }
 
 titleScreen.addEventListener("click", showMainMenu);
+
 document.addEventListener("keydown", () => {
-  if (!titleScreen.classList.contains("fade-out")) showMainMenu();
+    showMainMenu();
 });
 
 /******************************************************
