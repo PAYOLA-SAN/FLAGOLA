@@ -247,28 +247,28 @@ h1 {
   0%   { top: -400px; }
   70%  { top: 220px; }   /* deeper drop */
   85%  { top: 40px; }    /* stronger bounce up */
-  100% { top: 80px; }    /* final resting position */
+  100% { top: 130px; }    /* final resting position */
 
 }
 
 .title-press {
   font-family: "Press Start 2P", monospace;
-  font-size: 30px;
+  font-size: 40px;
   color: white;
   text-shadow: 3px 3px #000;
   position: absolute;
-  top: 380px;
+  top: 460px;
   left: 50%;
   transform: translateX(-50%);
   animation: blink 0.7s steps(2) infinite;
 }
 .title-subtitle {
   font-family: "Press Start 2P", monospace;
-  font-size: 28px;
+  font-size: 32px;
   color: white;
   text-shadow: 3px 3px #000;
   position: absolute;
-  top: 300px;
+  top: 360px;
   left: 50%;
   transform: translateX(-50%);
 }
