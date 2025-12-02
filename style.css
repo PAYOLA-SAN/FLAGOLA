@@ -257,7 +257,7 @@ h1 {
   color: white;
   text-shadow: 3px 3px #000;
   position: absolute;
-  top: 420px;
+  top: 460px;
   left: 50%;
   transform: translateX(-50%);
   animation: blink 0.7s steps(2) infinite;
@@ -268,7 +268,7 @@ h1 {
   color: white;
   text-shadow: 3px 3px #000;
   position: absolute;
-  top: 340px;
+  top: 375px;
   left: 50%;
   transform: translateX(-50%);
 }
