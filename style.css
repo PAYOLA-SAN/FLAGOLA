@@ -216,8 +216,10 @@ h1 {
 }
 
 /* ------------------------------------------ */
-/*  8-bit Title Screen (OutRun style)         */
+/* REAL 8-BIT PIXEL TITLE SCREEN (SEGA STYLE) */
 /* ------------------------------------------ */
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 .title-screen {
   position: fixed;
@@ -225,51 +227,56 @@ h1 {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(#1e64ff, #55c6ff 40%, #ffe195 80%);
+  background: #1c00ff; /* 8-bit blue */
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  z-index: 9999;
+  align-items: center;
+
+  /* MAKE IT PIXELATED */
+  image-rendering: pixelated;
   font-family: "Press Start 2P", monospace;
+  z-index: 99999;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-
+/* GIANT 8-BIT LOGO */
 .title-logo {
-  font-size: 48px;
-  color: #fff;
+  font-size: 64px;               /* MUCH bigger */
+  color: #ffea00;                /* Sega Master System yellow */
   text-shadow: 4px 4px #000;
-  transform: translateY(-200px);
+  letter-spacing: 4px;
+
+  /* swoop from top */
+  transform: translateY(-300px);
   opacity: 0;
-  animation: titleDrop 1.3s ease-out forwards;
+  animation: logoSwoop 1.2s steps(6) forwards;
 }
 
-@keyframes titleDrop {
-  0% { transform: translateY(-200px); opacity: 0; }
-  60% { transform: translateY(20px); opacity: 1; }
+@keyframes logoSwoop {
+  0%   { transform: translateY(-300px); opacity: 0; }
+  70%  { transform: translateY(20px); opacity: 1; }
   100% { transform: translateY(0); opacity: 1; }
 }
 
+/* blinking green START like SEGA */
 .title-press {
   margin-top: 40px;
-  font-size: 18px;
-  color: #32ff32;
+  font-size: 22px;
+  color: #00ff00;
   text-shadow: 3px 3px #000;
-  opacity: 0;
-  animation: pressBlink 1.5s infinite;
+  animation: blink 0.6s steps(2) infinite;
 }
 
-@keyframes pressBlink {
-  0%, 50% { opacity: 0; }
-  51%, 100% { opacity: 1; }
+@keyframes blink {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
 }
 
-/* Fade out when entering main menu */
+/* fade when leaving */
 .fade-out {
-  animation: fadeOut 0.8s forwards;
+  animation: fadeOut 0.4s steps(1) forwards;
 }
 
 @keyframes fadeOut {
-  to { opacity: 0; pointer-events: none; }
+  to { opacity: 0; }
 }
