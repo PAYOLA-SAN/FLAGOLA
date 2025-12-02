@@ -245,9 +245,9 @@ h1 {
 
 @keyframes logoDrop {
   0%   { top: -400px; }
-  70%  { top: 220px; }   /* deeper drop */
-  85%  { top: 40px; }    /* stronger bounce up */
-  100% { top: 130px; }    /* final resting position */
+  70%  { top: 300px; }
+  85%  { top: 230px; }
+  100% { top: 250px; }
 
 }
 
@@ -257,7 +257,7 @@ h1 {
   color: white;
   text-shadow: 3px 3px #000;
   position: absolute;
-  top: 460px;
+  top: 420px;
   left: 50%;
   transform: translateX(-50%);
   animation: blink 0.7s steps(2) infinite;
@@ -268,7 +268,7 @@ h1 {
   color: white;
   text-shadow: 3px 3px #000;
   position: absolute;
-  top: 360px;
+  top: 340px;
   left: 50%;
   transform: translateX(-50%);
 }
