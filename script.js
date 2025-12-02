@@ -258,7 +258,7 @@ let questionPool = [];
 let questionOrder = [];
 let currentIndex = 0;
 let totalRounds = 0;
-let selectedRounds = "20";
+let selectedRounds = "ALL";
 let score = 0;
 let wrongQuestions = [];
 let currentAnswers = [];
@@ -317,35 +317,23 @@ function updateFilteredAndRoundButtons(){
   const count = filteredCountries.length;
   dataStatus.textContent = `Loaded ${count} countries.`;
 
-  // Decide default rounds based on how many countries are available
-  if (count >= 20) {
-    selectedRounds = "20";
-  } else if (count >= 10) {
-    selectedRounds = "10";
-  } else {
-    selectedRounds = "ALL";
-  }
-
   roundButtons.forEach(btn=>{
-    const v = btn.dataset.rounds;
-
-    if (v === "ALL") {
-      // ALL is always available
+    const v=btn.dataset.rounds;
+    if(v==="ALL"){
       btn.classList.remove("disabled");
-    } else {
-      const need = parseInt(v, 10);
-      if (need > count) {
+      btn.classList.add("active");
+      selectedRounds="ALL";
+    }else{
+      const need=parseInt(v,10);
+      if(need>count){
         btn.classList.add("disabled");
-      } else {
+        btn.classList.remove("active");
+      }else{
         btn.classList.remove("disabled");
       }
     }
-
-    // Highlight the currently selected default
-    btn.classList.toggle("active", v === selectedRounds);
   });
 }
-
 
 /******************************************************
  * START QUIZ
