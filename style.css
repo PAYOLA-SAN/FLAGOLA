@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 body {
   margin: 0;
   font-family: "Fredoka", system-ui, sans-serif;
@@ -327,4 +329,18 @@ animation-fill-mode: forwards;
   border: 4px solid #000;
   image-rendering: pixelated;
 }
+/* 8-bit font globally */
+body, p, button, .settings-title, .intro, .data-status, .error-message,
+.answer-btn, .quit-btn, .next-btn, .round-btn, .continent-btn,
+.start-button, #review, .top-bar, .result, .end-buttons, #quit-modal {
+  font-family: "Press Start 2P", monospace !important;
+  letter-spacing: 1px;
+}
+
+/* crisp pixel text */
+body {
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 
