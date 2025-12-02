@@ -285,3 +285,19 @@ animation-fill-mode: forwards;
   left: 50%;
   transform: translateX(-50%);
 }
+
+/* ----------------------------- */
+/* BLUE BACKGROUNDS (MATCH TITLE */
+/* ----------------------------- */
+
+#start-screen {
+  background: #1c00ff !important;
+}
+
+#quiz-screen {
+  background: #1c00ff !important;
+}
+
+#end-screen {
+  background: #1c00ff !important;
+}
