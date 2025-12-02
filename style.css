@@ -270,7 +270,7 @@ animation-fill-mode: forwards;
   color: white;
   text-shadow: 3px 3px #000;
   position: absolute;
-  top: 460px;
+  top: 470px;
   left: 50%;
   transform: translateX(-50%);
   animation: blink 0.7s steps(2) infinite;
@@ -281,7 +281,7 @@ animation-fill-mode: forwards;
   color: white;
   text-shadow: 3px 3px #000;
   position: absolute;
-  top: 375px;
+  top: 385px;
   left: 50%;
   transform: translateX(-50%);
 }
