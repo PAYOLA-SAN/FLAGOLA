@@ -219,64 +219,8 @@ h1 {
 /* REAL 8-BIT PIXEL TITLE SCREEN (SEGA STYLE) */
 /* ------------------------------------------ */
 
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-
 .title-screen {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #1c00ff; /* 8-bit blue */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  /* MAKE IT PIXELATED */
-  image-rendering: pixelated;
-  font-family: "Press Start 2P", monospace;
-  z-index: 99999;
-}
-
-/* GIANT 8-BIT LOGO */
-.title-logo {
-  font-size: 64px;               /* MUCH bigger */
-  color: #ffea00;                /* Sega Master System yellow */
-  text-shadow: 4px 4px #000;
-  letter-spacing: 4px;
-
-  /* swoop from top */
-  transform: translateY(-300px);
-  opacity: 0;
-  animation: logoSwoop 1.2s steps(6) forwards;
-}
-
-@keyframes logoSwoop {
-  0%   { transform: translateY(-300px); opacity: 0; }
-  70%  { transform: translateY(20px); opacity: 1; }
-  100% { transform: translateY(0); opacity: 1; }
-}
-
-/* blinking green START like SEGA */
-.title-press {
-  margin-top: 40px;
-  font-size: 22px;
-  color: #00ff00;
-  text-shadow: 3px 3px #000;
-  animation: blink 0.6s steps(2) infinite;
-}
-
-@keyframes blink {
-  0% { opacity: 0; }
-  50% { opacity: 1; }
-}
-
-/* fade when leaving */
-.fade-out {
-  animation: fadeOut 0.4s steps(1) forwards;
-}
-
-@keyframes fadeOut {
-  to { opacity: 0; }
+  background-image: url("Title background.png");
+  background-size: cover;
+  background-position: center;
 }
