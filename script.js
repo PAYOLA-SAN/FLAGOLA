@@ -508,6 +508,26 @@ function showStartScreen(){
 }
 
 /******************************************************
+ * TITLE SCREEN HANDLER
+ ******************************************************/
+
+const titleScreen = document.getElementById("title-screen");
+const titlePress = document.getElementById("title-press");
+
+function showMainMenu() {
+  titleScreen.classList.add("fade-out");
+  setTimeout(() => {
+    titleScreen.style.display = "none";
+  }, 800);
+}
+
+// Allow click or keyboard or touch to continue
+titleScreen.addEventListener("click", showMainMenu);
+document.addEventListener("keydown", () => {
+  if (!titleScreen.classList.contains("fade-out")) showMainMenu();
+});
+
+/******************************************************
  * SETTINGS EVENTS
  ******************************************************/
 
