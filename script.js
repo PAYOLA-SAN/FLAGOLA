@@ -41,6 +41,21 @@ const answerButtons = [
   document.getElementById("answer4")
 ];
 
+function pixelSwitch(targetScreen) {
+    // remove previous active classes
+    document.querySelectorAll(".screen").forEach(scr => scr.classList.remove("active"));
+
+    // short delay to allow CSS steps animation to trigger
+    setTimeout(() => {
+        document.querySelectorAll(".screen").forEach(scr => scr.style.display = "none");
+
+        const el = document.getElementById(targetScreen);
+        el.style.display = "block";
+        el.classList.add("active");
+    }, 10);
+}
+
+
 /******************************************************
  * FULL OFFLINE COUNTRY DATA (197 entries)
  * format:
@@ -480,18 +495,10 @@ quitYes.onclick=()=>{
  * END SCREEN
  ******************************************************/
 
-function showEndScreen(){
-  startScreen.classList.add("hidden");
-  quizScreen.classList.add("hidden");
-  endScreen.classList.remove("hidden");
+function showEndScreen() {
+    pixelSwitch("end-screen");
+}
 
-  finalScoreDisplay.textContent=`${score} / ${totalRounds}`;
-
-  reviewContainer.innerHTML="";
-  if(wrongQuestions.length===0){
-    reviewContainer.textContent="Perfect — all correct.";
-    return;
-  }
 
   const ul=document.createElement("ul");
   wrongQuestions.forEach(w=>{
@@ -506,18 +513,14 @@ function showEndScreen(){
  * SCREEN SWITCH
  ******************************************************/
 
-function showQuizScreen(){
-  startScreen.classList.add("hidden");
-  quizScreen.classList.remove("hidden");
-  endScreen.classList.add("hidden");
+function showQuizScreen() {
+    pixelSwitch("quiz-screen");
 }
 
-function showStartScreen(){
-  startScreen.classList.remove("hidden");
-  quizScreen.classList.add("hidden");
-  endScreen.classList.add("hidden");
-  errorMessage.textContent="";
+function showStartScreen() {
+    pixelSwitch("start-screen");
 }
+
 
 /******************************************************
  * TITLE SCREEN HANDLER
