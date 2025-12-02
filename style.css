@@ -240,7 +240,14 @@ h1 {
   top: -400px;
   left: 50%;
   transform: translateX(-50%);
-  animation: logoDrop 0.8s cubic-bezier(0.1, 0.9, 0.05, 1.4) forwards;
+  animation: logoDrop 1.8s cubic-bezier(0.1, 0.9, 0.05, 1.4) forwards;
+  animation-delay: 0s, 1.8s;
+animation-name: logoDrop, logoIdleBounce;
+animation-duration: 1.8s, 3s;
+animation-timing-function: cubic-bezier(0.1, 0.9, 0.05, 1.4), ease-in-out;
+animation-iteration-count: 1, infinite;
+animation-fill-mode: forwards;
+
 }
 
 @keyframes logoDrop {
@@ -250,6 +257,12 @@ h1 {
   100% { top: 250px; }
 
 }
+@keyframes logoIdleBounce {
+  0%   { top: 250px; }
+  50%  { top: 235px; }
+  100% { top: 250px; }
+}
+
 
 .title-press {
   font-family: "Press Start 2P", monospace;
