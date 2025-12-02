@@ -300,4 +300,15 @@ animation-fill-mode: forwards;
 
 #end-screen {
   background: #1c00ff !important;
+
+
 }
+
+/* Reuse FLAGOLA PNG on menu / quiz / end screens */
+.logo-menu {
+  display: block;
+  margin: 40px auto 20px;
+  width: 200px;              /* adjust if too big or small */
+  image-rendering: pixelated;
+}
+
