@@ -312,3 +312,19 @@ animation-fill-mode: forwards;
   image-rendering: pixelated;
 }
 
+/* Light-blue background behind all flags */
+.flag {
+  background: #88c0ff;
+  padding: 20px;
+  border: 4px solid #000;
+  image-rendering: pixelated;
+}
+
+/* For dynamically inserted quiz flags */
+#flag-image {
+  background: #88c0ff;
+  padding: 20px;
+  border: 4px solid #000;
+  image-rendering: pixelated;
+}
+
