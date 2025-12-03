@@ -531,7 +531,7 @@ function showEndScreen(){
   endScreen.classList.remove("hidden");
 
   finalScoreDisplay.textContent=`${score} / ${totalRounds}`;
-    const msg = getScoreMessage(score, numberOfQuestions);
+    const msg = getScoreMessage(score, totalRounds);
 document.getElementById("score-message").textContent = msg;
 
 
