@@ -98,6 +98,8 @@ h1 {
   font-size: 1.05rem;
   font-weight: 600;
   cursor: pointer;
+  animation: startPulse 1.2s infinite ease-in-out;
+
 }
 
 /* FIXED HEIGHT FLAG AREA */
@@ -319,5 +321,11 @@ animation-fill-mode: forwards;
   0% { opacity: 1; }
   50% { opacity: 0; }
   100% { opacity: 1; }
+}
+
+@keyframes startPulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.12); }
+  100% { transform: scale(1); }
 }
 
