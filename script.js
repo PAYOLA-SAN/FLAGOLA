@@ -41,6 +41,10 @@ const answerButtons = [
   document.getElementById("answer4")
 ];
 
+const sfxStart = document.getElementById("sfx-start");
+const sfxGuess = document.getElementById("sfx-guess");
+
+
 /******************************************************
  * FULL OFFLINE COUNTRY DATA (197 entries)
  * format:
@@ -420,6 +424,11 @@ function loadQuestion(){
 }
 
 function handleAnswer(i){
+  if (sfxGuess) {
+    sfxGuess.currentTime = 0;
+    sfxGuess.play();
+  }
+
   const q=questionPool[questionOrder[currentIndex]];
   const ans=currentAnswers[i];
 
@@ -548,7 +557,13 @@ continentButtons.forEach(btn=>{
   });
 });
 
-startBtn.onclick=startQuiz;
+startBtn.onclick = () => {
+  if (sfxStart) {
+    sfxStart.currentTime = 0;
+    sfxStart.play();
+  }
+  startQuiz();
+};
 nextBtn.onclick=nextQuestion;
 tryAgainBtn.onclick=startQuiz;
 mainMenuBtn.onclick=showStartScreen;
