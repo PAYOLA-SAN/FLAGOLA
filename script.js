@@ -584,12 +584,15 @@ function showMainMenu() {
 
   setTimeout(() => {
     titleScreen.style.display = "none";
+
     startScreen.classList.add("pixelate-in");
     showStartScreen();
+
     setTimeout(() => {
       startScreen.classList.remove("pixelate-in");
-    }, 700);
-  }, 700);
+    }, 600);
+
+  }, 600);
 }
 
 titleScreen.addEventListener("click", showMainMenu);
