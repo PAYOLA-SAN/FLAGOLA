@@ -329,3 +329,20 @@ animation-fill-mode: forwards;
   100% { transform: scale(1); }
 }
 
+@keyframes pixelateOut {
+  0%   { filter: pixelate(0); opacity: 1; }
+  100% { filter: pixelate(12); opacity: 0; }
+}
+
+@keyframes pixelateIn {
+  0%   { filter: pixelate(12); opacity: 0; }
+  100% { filter: pixelate(0); opacity: 1; }
+}
+
+.pixelate-out {
+  animation: pixelateOut 0.7s forwards;
+}
+
+.pixelate-in {
+  animation: pixelateIn 0.7s forwards;
+}
