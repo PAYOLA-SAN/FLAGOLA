@@ -262,7 +262,7 @@ let questionPool = [];
 let questionOrder = [];
 let currentIndex = 0;
 let totalRounds = 0;
-let selectedRounds = "ALL";
+let selectedRounds = "10";
 let score = 0;
 let wrongQuestions = [];
 let currentAnswers = [];
@@ -322,22 +322,26 @@ function updateFilteredAndRoundButtons(){
   dataStatus.textContent = `Loaded ${count} countries.`;
 
   roundButtons.forEach(btn=>{
-    const v=btn.dataset.rounds;
-    if(v==="ALL"){
+    const v = btn.dataset.rounds;
+
+    if (v === "ALL") {
       btn.classList.remove("disabled");
-      btn.classList.add("active");
-      selectedRounds="ALL";
-    }else{
-      const need=parseInt(v,10);
-      if(need>count){
+      btn.classList.remove("active");
+    } else {
+      const need = parseInt(v, 10);
+      if (need > count) {
         btn.classList.add("disabled");
         btn.classList.remove("active");
-      }else{
+      } else {
         btn.classList.remove("disabled");
+        if (v === selectedRounds) {
+          btn.classList.add("active");
+        }
       }
     }
   });
 }
+
 
 /******************************************************
  * START QUIZ
