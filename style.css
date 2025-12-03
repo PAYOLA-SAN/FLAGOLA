@@ -215,6 +215,15 @@ h1 {
   justify-content: space-evenly;
 }
 
+.start-button,
+.round-btn,
+.continent-btn,
+.answer-btn,
+.end-buttons button,
+.modal-buttons button {
+  font-family: "Press Start 2P", monospace;
+}
+
 /* ------------------------------------------ */
 /* REAL 8-BIT PIXEL TITLE SCREEN (SEGA STYLE) */
 /* ------------------------------------------ */
