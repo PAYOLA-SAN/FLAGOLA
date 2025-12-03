@@ -226,6 +226,12 @@ h1 {
   font-family: "Press Start 2P", monospace;
 }
 
+.next-btn,
+.quit-btn {
+  font-family: "Press Start 2P", monospace !important;
+}
+
+
 /* ------------------------------------------ */
 /* REAL 8-BIT PIXEL TITLE SCREEN (SEGA STYLE) */
 /* ------------------------------------------ */
