@@ -236,7 +236,7 @@ h1 {
 .score-message {
   font-family: "Press Start 2P", monospace;
   font-size: 22px;
-  color: white;
+  color: #ff4444;
   text-shadow: 3px 3px #000;
   margin-top: 20px;
   text-align: center;
