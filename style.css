@@ -233,6 +233,16 @@ h1 {
   font-family: "Press Start 2P", monospace !important;
 }
 
+.score-message {
+  font-family: "Press Start 2P", monospace;
+  font-size: 22px;
+  color: white;
+  text-shadow: 3px 3px #000;
+  margin-top: 20px;
+  text-align: center;
+  line-height: 1.4;
+}
+
 
 /* ------------------------------------------ */
 /* REAL 8-BIT PIXEL TITLE SCREEN (SEGA STYLE) */
@@ -310,3 +320,4 @@ animation-fill-mode: forwards;
   50% { opacity: 0; }
   100% { opacity: 1; }
 }
+
