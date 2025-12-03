@@ -578,10 +578,18 @@ function showStartScreen(){
 const titleScreen = document.getElementById("title-screen");
 
 function showMainMenu() {
-  titleScreen.classList.add("fade-out");
+  if (titleScreen.classList.contains("pixelate-out")) return;
+
+  titleScreen.classList.add("pixelate-out");
+
   setTimeout(() => {
     titleScreen.style.display = "none";
-  }, 400);
+    startScreen.classList.add("pixelate-in");
+    showStartScreen();
+    setTimeout(() => {
+      startScreen.classList.remove("pixelate-in");
+    }, 700);
+  }, 700);
 }
 
 titleScreen.addEventListener("click", showMainMenu);
