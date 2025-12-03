@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://payola-san.github.io/FLAGOLA/sitemap.xml
