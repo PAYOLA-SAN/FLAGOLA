@@ -476,6 +476,54 @@ quitYes.onclick=()=>{
 /******************************************************
  * END SCREEN
  ******************************************************/
+function getScoreMessage(score, total) {
+  const pct = (score / total) * 100;
+
+  if (pct < 40) {
+    const msgs = [
+      "You’re not very good at this, are you?",
+      "At least nobody got hurt.",
+      "Your flag game is weak.",
+      "Pure embarrassment.",
+      "You brought shame on your family."
+    ];
+    return msgs[Math.floor(Math.random() * msgs.length)];
+  }
+
+  if (pct < 80) {
+    const msgs = [
+      "You tried, I guess.",
+      "Your flag game is mediocre.",
+      "Fair to middling.",
+      "Try harder, little buddy.",
+      "PUSH FOR MORE!",
+      "Keep pressing and guessing."
+    ];
+    return msgs[Math.floor(Math.random() * msgs.length)];
+  }
+
+  if (pct < 100) {
+    const msgs = [
+      "You’re good. I admit it.",
+      "Nice work. Truly nice work.",
+      "Good – but not flawless :)",
+      "Push for 100% next time.",
+      "I see you know flags.",
+      "Your flag game is powerful."
+    ];
+    return msgs[Math.floor(Math.random() * msgs.length)];
+  }
+
+  // 100%
+  const msgs = [
+    "Your flag game is insane!",
+    "We just witnessed greatness!",
+    "You are the Michael Jordan of flag quizzes!",
+    "Ladies and gentlemen, we have a winner!",
+    "I can’t believe what I just saw!"
+  ];
+  return msgs[Math.floor(Math.random() * msgs.length)];
+}
 
 function showEndScreen(){
   startScreen.classList.add("hidden");
@@ -483,6 +531,9 @@ function showEndScreen(){
   endScreen.classList.remove("hidden");
 
   finalScoreDisplay.textContent=`${score} / ${totalRounds}`;
+    const msg = getScoreMessage(score, numberOfQuestions);
+document.getElementById("score-message").textContent = msg;
+
 
   reviewContainer.innerHTML="";
   if(wrongQuestions.length===0){
