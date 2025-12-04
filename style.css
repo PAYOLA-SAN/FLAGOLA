@@ -193,18 +193,6 @@ h1 {
   filter: brightness(1.05);
 }
 
-.top-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin: 0 0 6px;
-}
-
-.top-bar p {
-  margin: 0;
-  font-size: calc(1rem - 2pt);
-}
-
 /* FIXED HEIGHT FLAG AREA */
 .flag-box {
   height: 250px;
@@ -219,9 +207,8 @@ h1 {
 
 .flag {
   max-width: 100%;
-  height: 220px;
+  max-height: 100%;
   width: auto;
-  object-fit: contain;
   border: 2px solid black;
 }
 
@@ -233,7 +220,7 @@ h1 {
 
 .answer-btn {
   position: relative;
-  padding: calc(12px * 0.9) calc(16px * 0.9);
+  padding: 12px 16px;
   border-radius: 12px;
   background: #f7f8fe;
   border: 2px solid #d0d4ea;
@@ -429,7 +416,7 @@ animation-fill-mode: forwards;
   color: white;
   text-shadow: 3px 3px #000;
   position: absolute;
-  top: 400px;
+  top: 405px;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -507,4 +494,3 @@ animation-fill-mode: forwards;
 #game-title span:nth-child(5) { animation-delay: 0.60s; }
 #game-title span:nth-child(6) { animation-delay: 0.75s; }
 #game-title span:nth-child(7) { animation-delay: 0.90s; }
-
