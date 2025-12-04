@@ -276,6 +276,21 @@ h1 {
   cursor: not-allowed;
 }
 
+.next-btn,
+.quit-btn,
+.modal-buttons button {
+  transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.2s ease;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.next-btn:hover:not(:disabled),
+.quit-btn:hover,
+.modal-buttons button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.2);
+  filter: brightness(1.05);
+}
+
 /* FIX FOR LAYOUT JUMP */
 .result {
   min-height: 30px;
