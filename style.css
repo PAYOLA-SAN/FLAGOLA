@@ -91,6 +91,11 @@ h1 {
   border: 2px solid #ffd447;
   background: #1545ba;
   box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.15);
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #0f2f82;
 }
 
 .continent-btn.active {
@@ -102,18 +107,7 @@ h1 {
 .continent-btn.active::before {
   background: #ffd447;
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.18);
-}
-
-.continent-btn.active::after {
-  content: "";
-  position: absolute;
-  left: 18px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 8px;
-  height: 8px;
-  background: #0f2f82;
-  border: 2px solid #071f5a;
+  content: "X";
 }
 
 .continent-btn:hover {
