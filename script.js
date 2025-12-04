@@ -578,26 +578,27 @@ function showStartScreen(){
 const titleScreen = document.getElementById("title-screen");
 
 function showMainMenu() {
-  if (titleScreen.classList.contains("pixelate-out")) return;
+  if (titleScreen.classList.contains("screen-fade-out")) return;
 
-  titleScreen.classList.add("pixelate-out");
+  const transitionDuration = 500;
+  titleScreen.classList.add("screen-fade-out");
 
   setTimeout(() => {
     titleScreen.style.display = "none";
 
-    startScreen.classList.add("pixelate-in");
+    startScreen.classList.add("screen-fade-in");
     showStartScreen();
 
     setTimeout(() => {
-      startScreen.classList.remove("pixelate-in");
-    }, 600);
+      startScreen.classList.remove("screen-fade-in");
+    }, transitionDuration);
 
-  }, 600);
+  }, transitionDuration);
 }
 
 titleScreen.addEventListener("click", showMainMenu);
 document.addEventListener("keydown", () => {
-  if (!titleScreen.classList.contains("fade-out")) showMainMenu();
+  if (!titleScreen.classList.contains("screen-fade-out")) showMainMenu();
 });
 
 /******************************************************
