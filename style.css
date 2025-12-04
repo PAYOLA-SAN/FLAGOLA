@@ -38,22 +38,30 @@ h1 {
   padding: 12px 14px;
   border-radius: 14px;
   margin: 16px 0;
+  text-align: center;
 }
 
 .settings-title {
   margin: 0 0 8px;
   font-size: 0.95rem;
+  text-align: center;
 }
 
-.rounds-buttons,
-.continent-buttons {
+.rounds-buttons {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  justify-content: center;
 }
 
-.round-btn,
-.continent-btn {
+.continent-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  justify-items: center;
+}
+
+.round-btn {
   padding: 8px 14px;
   border-radius: 999px;
   border: 1px solid #c3c7dd;
@@ -61,11 +69,66 @@ h1 {
   cursor: pointer;
 }
 
-.round-btn.active,
-.continent-btn.active {
+.round-btn.active {
   background: #1a73e8;
   color: #ffffff;
   border-color: #1355a8;
+}
+
+.continent-btn {
+  position: relative;
+  width: 100%;
+  padding: 12px 16px 12px 44px;
+  border-radius: 12px;
+  border: 2px solid #0f2f82;
+  background: linear-gradient(145deg, #0c2a71, #123798);
+  color: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #071f5a;
+  text-align: left;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s ease;
+}
+
+.continent-btn::before {
+  content: "";
+  position: absolute;
+  left: 14px;
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  border: 2px solid #ffd447;
+  background: #0c2a71;
+  box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.15);
+}
+
+.continent-btn.active {
+  background: linear-gradient(145deg, #1545ba, #0f2f82);
+  border-color: #1c52d6;
+  box-shadow: 0 4px 0 #0a265e;
+}
+
+.continent-btn.active::before {
+  background: #ffd447;
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.18);
+}
+
+.continent-btn.active::after {
+  content: "✓";
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-56%);
+  color: #0f2f82;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.continent-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #071f5a;
 }
 
 .round-btn.disabled {
@@ -79,6 +142,7 @@ h1 {
   margin-top: 10px;
   font-size: 0.85rem;
   color: #61657c;
+  text-align: center;
 }
 
 .error-message {
@@ -89,7 +153,9 @@ h1 {
 }
 
 .start-button {
-  width: 100%;
+  display: block;
+  width: min(100%, 360px);
+  margin: 18px auto 0;
   padding: 12px 26px;
   border-radius: 999px;
   border: none;
