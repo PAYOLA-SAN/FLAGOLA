@@ -412,6 +412,7 @@ function loadQuestion(){
   flagImage.src=q.flag;
   result.textContent="";
   nextBtn.disabled=true;
+  nextBtn.textContent = (currentIndex === questionOrder.length - 1) ? "Finish" : "Next";
 
   currentAnswers = q.answers.map(t=>({
     text:t,
