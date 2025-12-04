@@ -268,7 +268,7 @@ h1 {
   width: 650px;
   image-rendering: pixelated;
   position: absolute;
-  top: -400px;
+  top: -440px;
   left: 50%;
   transform: translateX(-50%);
   animation: logoDrop 1.8s cubic-bezier(0.1, 0.9, 0.05, 1.4) forwards;
@@ -282,9 +282,9 @@ animation-fill-mode: forwards;
 }
 
 @keyframes logoDrop {
-  0%   { top: -900px; }
-  70%  { top: 360px; }
-  85%  { top: 230px; }
+  0%   { top: -440px; }
+  70%  { top: 316px; }
+  85%  { top: 238px; }
   100% { top: 250px; }
 
 }
