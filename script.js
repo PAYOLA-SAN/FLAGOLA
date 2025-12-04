@@ -440,12 +440,10 @@ function handleAnswer(i){
 
   if(ans.isCorrect){
     answerButtons[i].classList.add("correct");
-    result.textContent="Correct!";
     score++;
     scoreDisplay.textContent=score.toString();
   }else{
     answerButtons[i].classList.add("wrong");
-    result.textContent="Wrong.";
     wrongQuestions.push({correct:q.name,chosen:ans.text});
   }
 
