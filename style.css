@@ -419,6 +419,33 @@ animation-fill-mode: forwards;
   transform: translateX(-50%);
   animation: blink 1.7s steps(2) infinite;
 }
+.secret-btn {
+  position: absolute;
+  right: 11%;
+  top: 46%;
+  transform: translateY(-50%);
+  background: linear-gradient(180deg, #ff5555, #c40000);
+  border: 3px solid #6b0000;
+  color: #fff;
+  padding: 16px 20px;
+  border-radius: 12px;
+  font-family: "Press Start 2P", monospace;
+  box-shadow: 0 6px 0 #5a0000;
+  cursor: pointer;
+  text-shadow: 2px 2px #000;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.2s ease;
+}
+
+.secret-btn:hover {
+  transform: translateY(-52%);
+  box-shadow: 0 8px 0 #5a0000;
+  filter: brightness(1.05);
+}
+
+.secret-btn:active {
+  transform: translateY(-48%);
+  box-shadow: 0 3px 0 #5a0000;
+}
 .title-subtitle {
   font-family: "Press Start 2P", monospace;
   font-size: 32px;
