@@ -27,6 +27,7 @@ const quitBtn = document.getElementById("quit-btn");
 const quitModal = document.getElementById("quit-modal");
 const quitYes = document.getElementById("quit-yes");
 const quitNo = document.getElementById("quit-no");
+const secretBtn = document.getElementById("secret-btn");
 
 const errorMessage = document.getElementById("error-message");
 const dataStatus = document.getElementById("data-status");
@@ -253,6 +254,59 @@ const COUNTRY_DATA = [
 { name:"Palestine",region:"Asia",sub:"Western Asia",code:"ps" }
 ];
 
+const US_STATE_DATA = [
+{ name:"Alabama",code:"al",flag:"https://flagcdn.com/us-al.svg" },
+{ name:"Alaska",code:"ak",flag:"https://flagcdn.com/us-ak.svg" },
+{ name:"Arizona",code:"az",flag:"https://flagcdn.com/us-az.svg" },
+{ name:"Arkansas",code:"ar",flag:"https://flagcdn.com/us-ar.svg" },
+{ name:"California",code:"ca",flag:"https://flagcdn.com/us-ca.svg" },
+{ name:"Colorado",code:"co",flag:"https://flagcdn.com/us-co.svg" },
+{ name:"Connecticut",code:"ct",flag:"https://flagcdn.com/us-ct.svg" },
+{ name:"Delaware",code:"de",flag:"https://flagcdn.com/us-de.svg" },
+{ name:"Florida",code:"fl",flag:"https://flagcdn.com/us-fl.svg" },
+{ name:"Georgia",code:"ga",flag:"https://flagcdn.com/us-ga.svg" },
+{ name:"Hawaii",code:"hi",flag:"https://flagcdn.com/us-hi.svg" },
+{ name:"Idaho",code:"id",flag:"https://flagcdn.com/us-id.svg" },
+{ name:"Illinois",code:"il",flag:"https://flagcdn.com/us-il.svg" },
+{ name:"Indiana",code:"in",flag:"https://flagcdn.com/us-in.svg" },
+{ name:"Iowa",code:"ia",flag:"https://flagcdn.com/us-ia.svg" },
+{ name:"Kansas",code:"ks",flag:"https://flagcdn.com/us-ks.svg" },
+{ name:"Kentucky",code:"ky",flag:"https://flagcdn.com/us-ky.svg" },
+{ name:"Louisiana",code:"la",flag:"https://flagcdn.com/us-la.svg" },
+{ name:"Maine",code:"me",flag:"https://flagcdn.com/us-me.svg" },
+{ name:"Maryland",code:"md",flag:"https://flagcdn.com/us-md.svg" },
+{ name:"Massachusetts",code:"ma",flag:"https://flagcdn.com/us-ma.svg" },
+{ name:"Michigan",code:"mi",flag:"https://flagcdn.com/us-mi.svg" },
+{ name:"Minnesota",code:"mn",flag:"https://flagcdn.com/us-mn.svg" },
+{ name:"Mississippi",code:"ms",flag:"https://flagcdn.com/us-ms.svg" },
+{ name:"Missouri",code:"mo",flag:"https://flagcdn.com/us-mo.svg" },
+{ name:"Montana",code:"mt",flag:"https://flagcdn.com/us-mt.svg" },
+{ name:"Nebraska",code:"ne",flag:"https://flagcdn.com/us-ne.svg" },
+{ name:"Nevada",code:"nv",flag:"https://flagcdn.com/us-nv.svg" },
+{ name:"New Hampshire",code:"nh",flag:"https://flagcdn.com/us-nh.svg" },
+{ name:"New Jersey",code:"nj",flag:"https://flagcdn.com/us-nj.svg" },
+{ name:"New Mexico",code:"nm",flag:"https://flagcdn.com/us-nm.svg" },
+{ name:"New York",code:"ny",flag:"https://flagcdn.com/us-ny.svg" },
+{ name:"North Carolina",code:"nc",flag:"https://flagcdn.com/us-nc.svg" },
+{ name:"North Dakota",code:"nd",flag:"https://flagcdn.com/us-nd.svg" },
+{ name:"Ohio",code:"oh",flag:"https://flagcdn.com/us-oh.svg" },
+{ name:"Oklahoma",code:"ok",flag:"https://flagcdn.com/us-ok.svg" },
+{ name:"Oregon",code:"or",flag:"https://flagcdn.com/us-or.svg" },
+{ name:"Pennsylvania",code:"pa",flag:"https://flagcdn.com/us-pa.svg" },
+{ name:"Rhode Island",code:"ri",flag:"https://flagcdn.com/us-ri.svg" },
+{ name:"South Carolina",code:"sc",flag:"https://flagcdn.com/us-sc.svg" },
+{ name:"South Dakota",code:"sd",flag:"https://flagcdn.com/us-sd.svg" },
+{ name:"Tennessee",code:"tn",flag:"https://flagcdn.com/us-tn.svg" },
+{ name:"Texas",code:"tx",flag:"https://flagcdn.com/us-tx.svg" },
+{ name:"Utah",code:"ut",flag:"https://flagcdn.com/us-ut.svg" },
+{ name:"Vermont",code:"vt",flag:"https://flagcdn.com/us-vt.svg" },
+{ name:"Virginia",code:"va",flag:"https://flagcdn.com/us-va.svg" },
+{ name:"Washington",code:"wa",flag:"https://flagcdn.com/us-wa.svg" },
+{ name:"West Virginia",code:"wv",flag:"https://flagcdn.com/us-wv.svg" },
+{ name:"Wisconsin",code:"wi",flag:"https://flagcdn.com/us-wi.svg" },
+{ name:"Wyoming",code:"wy",flag:"https://flagcdn.com/us-wy.svg" }
+];
+
 /******************************************************
  * INTERNAL STATE
  ******************************************************/
@@ -266,6 +320,7 @@ let selectedRounds = "10";
 let score = 0;
 let wrongQuestions = [];
 let currentAnswers = [];
+let currentMode = "world";
 
 let continentFilters = {
   africa: true,
@@ -342,12 +397,52 @@ function updateFilteredAndRoundButtons(){
   });
 }
 
+function buildQuestionPool(dataset){
+  return dataset.map(c=>{
+    const wrong=[];
+    while(wrong.length<3){
+      const other=dataset[Math.floor(Math.random()*dataset.length)];
+      if(other.name!==c.name && !wrong.includes(other.name)) wrong.push(other.name);
+    }
+    const answers=[...wrong,c.name];
+    shuffle(answers);
+
+    return{
+      name:c.name,
+      flag:c.flag || `https://flagcdn.com/${c.code}.svg`,
+      answers,
+      correctIndex:answers.indexOf(c.name)
+    };
+  });
+}
+
+function beginGame(dataset, rounds){
+  totalRounds=rounds;
+  questionTotalDisplay.textContent=rounds.toString();
+
+  score=0;
+  wrongQuestions=[];
+  scoreDisplay.textContent="0";
+
+  questionPool = buildQuestionPool(dataset);
+
+  questionOrder=Array.from(questionPool.keys());
+  shuffle(questionOrder);
+  if(questionOrder.length>rounds) questionOrder=questionOrder.slice(0,rounds);
+
+  currentIndex=0;
+
+  showQuizScreen();
+  loadQuestion();
+}
+
 
 /******************************************************
  * START QUIZ
  ******************************************************/
 
 function startQuiz(){
+  currentMode = "world";
   errorMessage.textContent="";
 
   const active = Object.values(continentFilters).filter(Boolean).length;
@@ -367,38 +462,13 @@ function startQuiz(){
   if(selectedRounds==="ALL") rounds=count;
   else rounds=Math.min(parseInt(selectedRounds,10),count);
 
-  totalRounds=rounds;
-  questionTotalDisplay.textContent=rounds.toString();
+  beginGame(filteredCountries, rounds);
+}
 
-  score=0;
-  wrongQuestions=[];
-  scoreDisplay.textContent="0";
-
-  questionPool = filteredCountries.map(c=>{
-    const wrong=[];
-    while(wrong.length<3){
-      const other=filteredCountries[Math.floor(Math.random()*filteredCountries.length)];
-      if(other.name!==c.name && !wrong.includes(other.name)) wrong.push(other.name);
-    }
-    const answers=[...wrong,c.name];
-    shuffle(answers);
-
-    return{
-      name:c.name,
-      flag:`https://flagcdn.com/${c.code}.svg`,
-      answers,
-      correctIndex:answers.indexOf(c.name)
-    };
-  });
-
-  questionOrder=Array.from(questionPool.keys());
-  shuffle(questionOrder);
-  if(questionOrder.length>rounds) questionOrder=questionOrder.slice(0,rounds);
-
-  currentIndex=0;
-
-  showQuizScreen();
-  loadQuestion();
+function startStateQuiz(){
+  currentMode = "states";
+  errorMessage.textContent="";
+  beginGame(US_STATE_DATA, US_STATE_DATA.length);
 }
 
 /******************************************************
@@ -564,6 +634,9 @@ function showQuizScreen(){
 }
 
 function showStartScreen(){
+  currentMode = "world";
+  loadCountryData();
+  updateFilteredAndRoundButtons();
   startScreen.classList.remove("hidden");
   quizScreen.classList.add("hidden");
   endScreen.classList.add("hidden");
@@ -600,6 +673,12 @@ document.addEventListener("keydown", () => {
   if (!titleScreen.classList.contains("screen-fade-out")) showMainMenu();
 });
 
+secretBtn.addEventListener("click", (event) => {
+  event.stopPropagation();
+  titleScreen.style.display = "none";
+  startStateQuiz();
+});
+
 /******************************************************
  * SETTINGS EVENTS
  ******************************************************/
@@ -631,7 +710,10 @@ startBtn.onclick = () => {
   startQuiz();
 };
 nextBtn.onclick=nextQuestion;
-tryAgainBtn.onclick=startQuiz;
+tryAgainBtn.onclick=()=>{
+  if(currentMode==="states") startStateQuiz();
+  else startQuiz();
+};
 mainMenuBtn.onclick=showStartScreen;
 
 /******************************************************
