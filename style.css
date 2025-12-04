@@ -62,17 +62,7 @@ h1 {
 }
 
 .round-btn {
-  padding: 8px 14px;
-  border-radius: 999px;
-  border: 1px solid #c3c7dd;
-  background: #ffffff;
   cursor: pointer;
-}
-
-.round-btn.active {
-  background: #1a73e8;
-  color: #ffffff;
-  border-color: #1355a8;
 }
 
 .continent-btn {
@@ -81,7 +71,7 @@ h1 {
   padding: 12px 16px 12px 44px;
   border-radius: 12px;
   border: 2px solid #0f2f82;
-  background: linear-gradient(145deg, #0c2a71, #123798);
+  background: #1545ba;
   color: #ffffff;
   cursor: pointer;
   box-shadow: 0 4px 0 #071f5a;
@@ -100,12 +90,12 @@ h1 {
   height: 18px;
   border-radius: 4px;
   border: 2px solid #ffd447;
-  background: #0c2a71;
+  background: #1545ba;
   box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.15);
 }
 
 .continent-btn.active {
-  background: linear-gradient(145deg, #1545ba, #0f2f82);
+  background: #0f2f82;
   border-color: #1c52d6;
   box-shadow: 0 4px 0 #0a265e;
 }
@@ -131,11 +121,41 @@ h1 {
   box-shadow: 0 6px 0 #071f5a;
 }
 
+.round-btn,
+.start-button,
+.continent-btn {
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s ease, filter 0.2s ease;
+}
+
+.round-btn,
+.start-button {
+  position: relative;
+  border-radius: 12px;
+  border: 2px solid #c3c7dd;
+  box-shadow: 0 4px 0 #a7abc4;
+  padding: 12px 16px;
+  background: #ffffff;
+  font-weight: 600;
+}
+
+.round-btn:hover,
+.start-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #8c90ab;
+}
+
 .round-btn.disabled {
   background: #e0e0e0;
   color: #888;
   border-color: #ccc;
   cursor: not-allowed;
+}
+
+.round-btn.active {
+  background: #1a73e8;
+  color: #ffffff;
+  border-color: #1355a8;
+  box-shadow: 0 4px 0 #0d3f86;
 }
 
 .data-status {
@@ -156,16 +176,21 @@ h1 {
   display: block;
   width: min(100%, 360px);
   margin: 18px auto 0;
-  padding: 12px 26px;
-  border-radius: 999px;
-  border: none;
+  padding: 14px 26px;
+  border-radius: 12px;
+  border: 2px solid #ff6f6f;
   background: linear-gradient(135deg, #ff9966, #ff5f6d);
   color: #ffffff;
   font-size: 1.05rem;
   font-weight: 600;
   cursor: pointer;
   animation: startPulse 2s infinite ease-in-out;
+  box-shadow: 0 6px 0 #c74747;
+}
 
+.start-button:hover {
+  box-shadow: 0 6px 0 #a94242;
+  filter: brightness(1.05);
 }
 
 /* FIXED HEIGHT FLAG AREA */
