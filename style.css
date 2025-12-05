@@ -5,12 +5,18 @@ body {
   color: #1b1d22;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 .hidden {
   display: none !important;
 }
 
 .app {
   max-width: 720px;
+  width: min(calc(100% - 32px), 720px);
   margin: 40px auto;
   background: #ffffff;
   padding: 28px 24px 32px;
@@ -324,7 +330,7 @@ h1 {
   background: white;
   padding: 20px;
   border-radius: 12px;
-  width: 300px;
+  width: min(90vw, 340px);
   text-align: center;
 }
 
@@ -380,7 +386,7 @@ h1 {
 }
 /* MOVING LOGO PNG */
 .title-logo-img {
-  width: 650px;
+  width: min(90vw, 650px);
   image-rendering: pixelated;
   position: absolute;
   top: -440px;
@@ -532,3 +538,97 @@ animation-fill-mode: forwards;
 #game-title span:nth-child(5) { animation-delay: 0.60s; }
 #game-title span:nth-child(6) { animation-delay: 0.75s; }
 #game-title span:nth-child(7) { animation-delay: 0.90s; }
+
+/* ----------------------------- */
+/* MOBILE RESPONSIVE ADJUSTMENTS */
+/* ----------------------------- */
+
+@media (max-width: 600px) {
+  body {
+    background: #483dff;
+  }
+
+  .app {
+    margin: 16px auto 20px;
+    padding: 20px 16px 24px;
+    width: min(calc(100% - 20px), 720px);
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+  }
+
+  .settings-block {
+    padding: 10px 12px;
+  }
+
+  .continent-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .continent-btn {
+    padding: 12px 14px 12px 44px;
+  }
+
+  .flag-box {
+    height: 190px;
+  }
+
+  .quiz-buttons,
+  .end-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .quiz-buttons button,
+  .end-buttons button {
+    width: 100%;
+  }
+
+  .title-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+    background-size: cover;
+  }
+
+  .title-logo-img {
+    position: static;
+    transform: none;
+    animation: none;
+    width: min(100%, 360px);
+    max-width: 90vw;
+  }
+
+  .title-subtitle {
+    position: static;
+    transform: none;
+    margin-top: 14px;
+    font-size: 22px;
+    text-align: center;
+  }
+
+  .title-press {
+    position: static;
+    transform: none;
+    margin-top: 18px;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .secret-btn {
+    position: static;
+    transform: none;
+    width: 100%;
+    max-width: 280px;
+    margin-top: 20px;
+    text-align: center;
+  }
+}
