@@ -252,7 +252,7 @@ h1 {
 }
 
 .quiz-buttons {
-  margin-top: 10px;
+  margin-top: 4px;
   display: flex;
   justify-content: space-between;
 }
@@ -295,7 +295,8 @@ h1 {
 
 /* FIX FOR LAYOUT JUMP */
 .result {
-  min-height: 30px;
+  min-height: 10px;
+  margin: 4px 0;
   display: flex;
   justify-content: center;
   align-items: center;
