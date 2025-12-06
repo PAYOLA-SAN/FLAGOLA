@@ -17,7 +17,7 @@ img {
 .app {
   max-width: 720px;
   width: min(calc(100% - 32px), 720px);
-  margin: 40px auto;
+  margin: 6px auto;
   background: #ffffff;
   padding: 28px 24px 32px;
   border-radius: 22px;
