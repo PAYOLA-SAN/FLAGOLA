@@ -19,7 +19,7 @@ img {
   width: min(calc(100% - 32px), 720px);
   margin: 6px auto;
   background: #ffffff;
-  padding: 28px 24px 32px;
+  padding: 3px 24px 3px;
   border-radius: 22px;
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
 }
@@ -574,7 +574,7 @@ h1 {
 
   .app {
     margin: 16px auto 20px;
-    padding: 20px 16px 24px;
+    padding: 2px 16px 2px;
     width: min(calc(100% - 20px), 720px);
   }
 
