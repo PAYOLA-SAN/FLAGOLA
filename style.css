@@ -196,7 +196,7 @@ h1 {
 
 /* FIXED HEIGHT FLAG AREA */
 .flag-box {
-  height: 250px;
+  height: 188px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -576,7 +576,7 @@ animation-fill-mode: forwards;
   }
 
   .flag-box {
-    height: 190px;
+    height: 143px;
   }
 
   .quiz-buttons,
