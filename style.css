@@ -258,7 +258,7 @@ h1 {
 }
 
 .quit-container {
-  margin-top: 18px;
+  margin-top: 1px;
   display: flex;
   justify-content: flex-end;
 }
@@ -323,8 +323,8 @@ h1 {
 
 /* FIX FOR LAYOUT JUMP */
 .result {
-  min-height: 10px;
-  margin: 4px 0;
+  min-height: 0;
+  margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
